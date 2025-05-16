@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+env/
+*.sqlite3
+instance/
+.mypy_cache/
+.dmypy.json
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Flask
+*.log
+*.db
+*.pid
+.flaskenv
+
+# Node/React
+node_modules/
+dist/
+build/
+.npm/
+.cache/
+.vite/
+.env.*          # frontendの.envも含む
+*.log
+
+# OS・エディタ系
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
