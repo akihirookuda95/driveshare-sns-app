@@ -10,7 +10,7 @@ from backend.app.models.user import User
 from backend.app.schemas.user import UserBase, UserCreate
 
 
-user_bp = Blueprint('user', __name__, url_prefix='/api/v1')
+user_bp = Blueprint('user', __name__)
 logger = logging.getLogger(__name__)
 
 
@@ -23,7 +23,7 @@ def create_user():
         new_user = User(
             username=user_data.username,
             email=user_data.email,
-            password=user_data.password,  # TODO: Ensure to hash the password in a real application
+            password_hash=user_data.password,  # TODO: Ensure to hash the password in a real application
         )
         db.session.add(new_user)
         db.session.commit()

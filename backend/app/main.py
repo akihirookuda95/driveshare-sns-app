@@ -5,6 +5,7 @@ from flask import Flask
 
 from backend.app.config import DevelopmentConfig, ProductionConfig, TestingConfig
 from backend.app.extensions import db, cors
+from backend.app.routes.user_route import user_bp
 
 
 # Load environment variables from .env file
@@ -23,6 +24,8 @@ def create_app():
 
     db.init_app(app)
     cors.init_app(app)
+
+    app.register_blueprint(user_bp)
 
     @app.route('/')
     def index():
