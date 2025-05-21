@@ -1,6 +1,5 @@
 import logging
--from sqlite3 import IntegrityError
-+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError
 
 from flask import Blueprint, request, jsonify
 from pydantic import ValidationError
@@ -32,6 +31,7 @@ def create_user():
         return jsonify(response.model_dump()), 201
 
     except ValidationError as e:
+        db.session.rollback()
         logger.warning(f"Validation error: {e.errors()}")
         return jsonify({"error": "入力内容に誤りがあります。"}), 400
 
