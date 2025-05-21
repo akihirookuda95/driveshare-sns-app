@@ -4,7 +4,11 @@ import os
 class Config:
     """Base configuration class."""
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get("SECRET_KEY", "dev_secret_key")
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    if not SECRET_KEY:
+        if os.environ.get("APP_ENV") == "production":
+            raise ValueError("SECRET_KEY environment variable is required in production")
+        SECRET_KEY = "dev_secret_key"
 
 
 class DevelopmentConfig(Config):
