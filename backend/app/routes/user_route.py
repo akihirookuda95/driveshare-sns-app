@@ -1,5 +1,6 @@
 import logging
-from sqlite3 import IntegrityError
+-from sqlite3 import IntegrityError
++from sqlalchemy.exc import IntegrityError
 
 from flask import Blueprint, request, jsonify
 from pydantic import ValidationError
