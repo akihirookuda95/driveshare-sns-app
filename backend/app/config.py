@@ -17,6 +17,8 @@ class ProductionConfig(Config):
     """Production configuration class."""
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    if not SQLALCHEMY_DATABASE_URI:
+        raise ValueError("DATABASE_URL environment variable is required in production")
 
 
 class TestingConfig(Config):
