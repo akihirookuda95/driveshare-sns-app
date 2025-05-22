@@ -11,6 +11,8 @@ post_bp = Blueprint('post', __name__, url_prefix='/posts')
 @post_bp.route('/', methods=['POST'])
 def create_post():
     post_data = request.get_json()
+    if not post_data:
+        return jsonify({"error": "リクエストボディが空です。"}), 400
     post_schema = PostCreate(**post_data)
 
     new_post = Post(
