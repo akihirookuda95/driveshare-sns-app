@@ -13,11 +13,12 @@ def test_client():
 
     with app.app_context():
         db.create_all()
-        yield app
+
+        from backend.app.models.user import User
+        user = User(id=1, username="testuser", email="test@example.com", password_hash="dummyhash")
+        db.session.add(user)
+        db.session.commit()
+
+        yield app.test_client()
         db.session.remove()
         db.drop_all()
-
-
-@pytest.fixture
-def client(app):
-    return app.test_client()

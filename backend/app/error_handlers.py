@@ -11,7 +11,7 @@ def register_error_handlers(app):
     @app.errorhandler(ValidationError)
     def handle_validation_error(error):
         logging.error(f"Validation error: {error.errors()}")
-        return jsonify({"error": "入力内容に誤りがあります。"}), 400
+        return jsonify({"error": "入力内容に誤りがあります。"}), 422
 
     @app.errorhandler(BadRequest)
     def handle_bad_request(error):
