@@ -19,3 +19,7 @@ class PostCreate(BaseModel):
     title: str
     content: str
     user_id: int
+
+
+class PostDetail(PostBase):
+    pass
