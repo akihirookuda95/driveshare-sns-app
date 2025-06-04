@@ -33,7 +33,7 @@ def create_post():
 def get_post_detail(post_id: int):
     post = Post.query.get(post_id)
     if post is None:
-        return jsonify({"error": "Post not found"}), 404
+        return jsonify({"error": f"Post with ID {post_id} not found."}), 404
     return jsonify(PostDetail.model_validate(post).model_dump()), 200
 
 

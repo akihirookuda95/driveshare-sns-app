@@ -1,10 +1,13 @@
 import pytest
-from backend.app import app
+from backend.app.main import create_app
 from backend.app.extensions import db
+from backend.app.config import TestingConfig
 
 
 @pytest.fixture
 def test_client():
+    app = create_app(TestingConfig)
+
     with app.app_context():
         db.create_all()
 

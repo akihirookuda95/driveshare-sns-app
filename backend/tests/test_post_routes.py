@@ -1,7 +1,3 @@
-import pytest
-from backend.app.models.post import Post
-
-
 def test_create_post_success(test_client):
     payload = {
         "title": "テスト投稿",

@@ -14,16 +14,18 @@ env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
 load_dotenv(env_path)
 
 
-def create_app():
+def create_app(config_class=None):
     app = Flask(__name__)
 
-    config_name = os.environ.get("APP_ENV", "development").lower()
-    if config_name == "production":
-        config = ProductionConfig()
-    elif config_name == "testing":
-        config = TestingConfig()
-    else:
-        config = DevelopmentConfig()
+    # config_name = os.environ.get("APP_ENV", "development").lower()
+    # if config_name == "production":
+    #     config = ProductionConfig()
+    # elif config_name == "testing":
+    #     config = TestingConfig()
+    # else:
+    #     config = DevelopmentConfig()
+
+    config = config_class()
     app.config.from_object(config)
 
     db.init_app(app)
