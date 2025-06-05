@@ -1,9 +1,10 @@
 from datetime import datetime
+from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
-class PostBase(BaseModel):
+class PostResponseSchema(BaseModel):
     id: int
     title: str
     content: str
@@ -15,11 +16,16 @@ class PostBase(BaseModel):
         from_attributes = True
 
 
-class PostCreate(BaseModel):
+class PostCreateSchema(BaseModel):
     title: str
     content: str
     user_id: int
 
 
-class PostDetail(PostBase):
+class PostUpdateSchema(BaseModel):
+    title: Optional[str] = Field(None, min_length=1, max_length=100)
+    content: Optional[str] = Field(None, min_length=1, max_length=255)
+
+
+class PostDetail(PostResponseSchema):
     pass
