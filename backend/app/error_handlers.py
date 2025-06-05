@@ -1,7 +1,7 @@
 import logging
 
 from flask import jsonify
-from werkzeug.exceptions import BadRequest
+from werkzeug.exceptions import BadRequest, NotFound
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from pydantic import ValidationError
 
@@ -48,3 +48,8 @@ def register_error_handlers(app):
         safe_rollback()
         logging.error(f"Unexpected error: {str(error)}")
         return jsonify({"error": "予期しないエラーが発生しました。"}), 500
+
+    @app.errorhandler(NotFound)
+    def handle_not_found(error):
+        logging.error(f"Not found: {error.description}")
+        return jsonify({"error": "リソースが見つかりません。"}), 404

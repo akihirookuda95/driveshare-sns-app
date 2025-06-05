@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 
-from backend.app.config import DevelopmentConfig, ProductionConfig, TestingConfig
+from backend.app.config import DevelopmentConfig
 from backend.app.error_handlers import register_error_handlers
 from backend.app.extensions import db, cors, migrate
 from backend.app.routes.user_route import user_bp
@@ -14,16 +14,24 @@ env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
 load_dotenv(env_path)
 
 
-def create_app():
+def create_app(config_class=None):
     app = Flask(__name__)
 
-    config_name = os.environ.get("APP_ENV", "development").lower()
-    if config_name == "production":
-        config = ProductionConfig()
-    elif config_name == "testing":
-        config = TestingConfig()
-    else:
-        config = DevelopmentConfig()
+    if config_class is None:
+        env = os.getenv('APP_ENV', 'development')
+        if env == 'production':
+            from backend.app.config import ProductionConfig
+            config_class = ProductionConfig
+        elif env == 'testing':
+            from backend.app.config import TestingConfig
+            config_class = TestingConfig
+        elif env == 'development':
+            from backend.app.config import DevelopmentConfig
+            config_class = DevelopmentConfig
+        else:
+            raise ValueError(f"Unknown environment: {env}")
+
+    config = config_class()
     app.config.from_object(config)
 
     db.init_app(app)
