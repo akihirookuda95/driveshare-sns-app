@@ -18,7 +18,19 @@ def create_app(config_class=None):
     app = Flask(__name__)
 
     if config_class is None:
-        config_class = DevelopmentConfig
+        env = os.getenv('APP_ENV', 'development')
+        if env == 'production':
+            from backend.app.config import ProductionConfig
+            config_class = ProductionConfig
+        elif env == 'testing':
+            from backend.app.config import TestingConfig
+            config_class = TestingConfig
+        elif env == 'development':
+            from backend.app.config import DevelopmentConfig
+            config_class = DevelopmentConfig
+        else:
+            raise ValueError(f"Unknown environment: {env}")
+
     config = config_class()
     app.config.from_object(config)
 

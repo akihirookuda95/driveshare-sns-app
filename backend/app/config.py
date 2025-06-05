@@ -1,4 +1,5 @@
 import os
+import secrets
 
 
 class Config:
@@ -6,11 +7,13 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     def __init__(self):
+        env = os.environ.get("APP_ENV", "development")
         self.SECRET_KEY = os.environ.get("SECRET_KEY")
         if not self.SECRET_KEY:
-            raise ValueError("SECRET_KEY environment variable is required")
-        else:
-            self.SECRET_KEY = self.SECRET_KEY.encode('utf-8')
+            if env == "production":
+                raise ValueError("SECRET_KEY environment variable is required in production")
+            else:
+                self.SECRET_KEY = secrets.token_hex(16)
 
 
 class DevelopmentConfig(Config):
