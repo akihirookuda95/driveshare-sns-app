@@ -7,8 +7,6 @@ class Config:
 
     def __init__(self):
         self.SECRET_KEY = os.environ.get("SECRET_KEY", "dev_secret_key")
-        if not self.SECRET_KEY and os.environ.get("APP_ENV") == "production":
-            raise ValueError("SECRET_KEY environment variable is required in production")
 
 
 class DevelopmentConfig(Config):
