@@ -6,7 +6,11 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     def __init__(self):
-        self.SECRET_KEY = os.environ.get("SECRET_KEY", "dev_secret_key")
+        self.SECRET_KEY = os.environ.get("SECRET_KEY")
+        if not self.SECRET_KEY:
+            raise ValueError("SECRET_KEY environment variable is required")
+        else:
+            self.SECRET_KEY = self.SECRET_KEY.encode('utf-8')
 
 
 class DevelopmentConfig(Config):
