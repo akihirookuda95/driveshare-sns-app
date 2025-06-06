@@ -9,7 +9,7 @@ class PostService:
     def __init__(self, repository: PostRepository):
         self.repository = repository
 
-    def get_all_posts(self) -> List:
+    def get_all_posts(self) -> List[Post]:
         """Retrieve all posts from the repository."""
         return self.repository.get_all_posts()
 

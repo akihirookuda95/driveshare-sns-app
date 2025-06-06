@@ -10,12 +10,18 @@ class PostRepository:
     @staticmethod
     def get_all_posts() -> List[Post]:
         """Retrieve all posts from the database."""
-        return Post.query.all()
+        posts = Post.query.all()
+        if not posts:
+            raise ValueError("No posts found.")
+        return posts
 
     @staticmethod
     def get_post_by_id(post_id: int) -> Optional[Post]:
         """Retrieve a post by its ID."""
-        return Post.query.get(post_id)
+        post = Post.query.get(post_id)
+        if not post:
+            raise ValueError(f"Post with ID {post_id} not found.")
+        return post
 
     @staticmethod
     def get_posts_with_filters(filters: Dict[str, Any], page: int = 1, per_page: int = 20) -> (List[Post], int):
