@@ -19,8 +19,6 @@ class PostRepository:
     def get_post_by_id(post_id: int) -> Optional[Post]:
         """Retrieve a post by its ID."""
         post = Post.query.get(post_id)
-        if not post:
-            raise ValueError(f"Post with ID {post_id} not found.")
         return post
 
     @staticmethod

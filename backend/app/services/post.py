@@ -1,4 +1,5 @@
 from typing import List
+from werkzeug.exceptions import NotFound
 
 from backend.app.repositories.post import PostRepository
 from backend.app.models.post import Post
@@ -17,7 +18,7 @@ class PostService:
         """Retrieve a post by its ID."""
         post = self.repository.get_post_by_id(post_id)
         if not post:
-            raise f"Post with ID {post_id} not found."
+            raise NotFound(f"Post with ID {post_id} not found.")
         return post
 
     def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> List[Post]:
