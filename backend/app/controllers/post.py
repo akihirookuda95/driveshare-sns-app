@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify, request
 from backend.app.extensions import db
 from backend.app.models.post import Post
 from backend.app.repositories.post import PostRepository
-from backend.app.schemas.post import PostCreateSchema, PostResponseSchema, PostUpdateSchema, PostDetail
+from backend.app.schemas.post import PostCreateSchema, PostResponseSchema, PostUpdateSchema
 from backend.app.services.post import PostService
 
 
