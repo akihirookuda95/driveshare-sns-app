@@ -1,3 +1,5 @@
+import logging
+
 from typing import List, Optional, Any, Dict
 
 from sqlalchemy.exc import SQLAlchemyError
@@ -10,10 +12,11 @@ class PostRepository:
     @staticmethod
     def get_all_posts() -> List[Post]:
         """Retrieve all posts from the database."""
-        posts = Post.query.all()
-        if not posts:
-            raise ValueError("No posts found.")
-        return posts
+        try:
+            return Post.query.all()
+        except SQLAlchemyError as e:
+            logging.error(f"Database error in get_all_posts: {str(e)}")
+            raise
 
     @staticmethod
     def get_post_by_id(post_id: int) -> Optional[Post]:
