@@ -20,7 +20,7 @@ class PostService:
             raise f"Post with ID {post_id} not found."
         return post
 
-    def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> (List, int):
+    def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> List[Post]:
         """Retrieve posts with optional filters and pagination."""
         return self.repository.get_posts_with_filters(filters, page, per_page)
 
@@ -29,7 +29,7 @@ class PostService:
         new_post = Post(
             title=post_data.title,
             content=post_data.content,
-            user_id=post_data.user_id
+            user_id=post_data.user_id,
         )
         return self.repository.create_post(new_post)
 

@@ -25,6 +25,7 @@ class PostCreateSchema(BaseModel):
 class PostUpdateSchema(BaseModel):
     title: Optional[str] = Field(None, min_length=1, max_length=100)
     content: Optional[str] = Field(None, min_length=1, max_length=255)
+    user_id: Optional[int] = None
 
 
 class PostDetail(PostResponseSchema):

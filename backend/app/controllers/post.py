@@ -36,7 +36,7 @@ def create_post() -> tuple[flask.Response, int]:
 
     post_schema = PostCreateSchema(**post_data)
 
-    new_post = PostService.create_post(post_schema)
+    new_post = post_service.create_post(post_schema)
 
     response = PostResponseSchema.model_validate(new_post)
     return jsonify(response.model_dump()), 201
@@ -48,7 +48,7 @@ def update_post(post_id: int) -> tuple[flask.Response, int]:
     if not post_data:
         return jsonify({"error": "リクエストボディが空です。"}), 400
 
-    post_schema = PostCreateSchema(**post_data)
+    post_schema = PostUpdateSchema(**post_data)
 
     updated_post = post_service.update_post(post_id, post_schema)
 

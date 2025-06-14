@@ -1,5 +1,6 @@
 import os
 
+from backend.app.models import user
 from dotenv import load_dotenv
 from flask import Flask
 
