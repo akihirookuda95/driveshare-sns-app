@@ -30,9 +30,10 @@ class PostService:
             raise NotFound(f"Post with ID {post_id} not found.")
         return post
 
-    def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> List[Post]:
+    def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> tuple[List[Post], int]:
         """Retrieve posts with optional filters and pagination."""
-        return self.repository.get_posts_with_filters(filters, page, per_page)
+        items, total = self.repository.get_posts_with_filters(filters, page, per_page)
+        return items, total
 
     def create_post(self, post_data: PostCreateSchema) -> Post:
         """Create a new post in the repository."""

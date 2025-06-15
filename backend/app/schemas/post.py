@@ -50,3 +50,25 @@ class PostCreateSchema(BaseModel):
 class PostUpdateSchema(BaseModel):
     title: Optional[str] = Field(None, min_length=1, max_length=255, description="Title of the post")
     content: Optional[str] = Field(None, min_length=1, max_length=1000, description="Content of the post")
+
+
+class PaginatedResponse(BaseModel):
+    """Schema for paginated response."""
+    items: List[PostListSchema]
+    total: int
+    page: int
+    per_page: int
+    pages: int
+
+
+    @classmethod
+    def create(cls, items: List[PostListSchema], total: int, page: int, per_page: int) -> 'PaginatedResponse':
+        """Create a paginated response."""
+        pages = (total + per_page - 1) // per_page if per_page > 0 else 1
+        return cls(
+            items=[PostListSchema.model_validate(item).model_dump() for item in items],
+            total=total,
+            page=page,
+            per_page=per_page,
+            pages=pages
+        )
