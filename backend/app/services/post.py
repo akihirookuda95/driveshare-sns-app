@@ -1,6 +1,5 @@
 from typing import List
 
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import NotFound
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -13,15 +12,15 @@ class PostService:
     def __init__(self, repository: PostRepository):
         self.repository = repository
 
+
     def get_all_posts(self) -> List[Post]:
         """Retrieve all posts from the repository."""
         try:
             posts = self.repository.get_all_posts()
-            if not posts:
-                raise NotFound("No posts found.")
             return posts
         except SQLAlchemyError as e:
-            raise Exception(f"Database error: {str(e)}")
+            raise Exception(f"Database error occured: {str(e)}")
+
 
     def get_post_by_id(self, post_id: int) -> Post:
         """Retrieve a post by its ID."""
@@ -29,6 +28,7 @@ class PostService:
         if not post:
             raise NotFound(f"Post with ID {post_id} not found.")
         return post
+
 
     def get_posts_with_filters(self, filters: dict, page: int = 1, per_page: int = 20) -> tuple[List[Post], int]:
         """Retrieve posts with optional filters and pagination."""
