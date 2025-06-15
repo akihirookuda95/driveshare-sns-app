@@ -1,13 +1,14 @@
 import os
 
+from backend.app.models import user
 from dotenv import load_dotenv
 from flask import Flask
 
 from backend.app.config import DevelopmentConfig
 from backend.app.error_handlers import register_error_handlers
 from backend.app.extensions import db, cors, migrate
-from backend.app.routes.user_route import user_bp
-from backend.app.routes.post_route import post_bp
+from backend.app.controllers.user import user_bp
+from backend.app.controllers.post import post_bp
 
 # Load environment variables from .env file
 env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')

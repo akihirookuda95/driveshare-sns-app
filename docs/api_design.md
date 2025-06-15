@@ -131,8 +131,8 @@ Content-Type: application/json
 }
 ```
 #### 使用スキーマ
-* リクエスト: `PostCreate`
-* レスポンス: `PostBase`
+* リクエスト: `PostCreateSchema`
+* レスポンス: `PostResponseSchema`
 
 
 ### GET /posts
@@ -162,7 +162,7 @@ Content-Type: application/json
 ]
 ```
 #### 使用スキーマ
-* レスポンス: `List[PostBase]`
+* レスポンス: `List[PostResponseSchema]`
 
 
 ### GET /posts/<id>
@@ -182,7 +182,7 @@ Content-Type: application/json
 }
 ```
 #### 使用スキーマ
-* レスポンス: `PostBase`
+* レスポンス: `PostResponseSchema`
 
 
 ### POST /routes

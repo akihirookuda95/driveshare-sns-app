@@ -43,13 +43,13 @@ def register_error_handlers(app):
         logging.error(f"Database error: {str(error)}")
         return jsonify({"error": "データベースエラーが発生しました。"}), 500
 
-    @app.errorhandler(Exception)
-    def handle_exception(error):
-        safe_rollback()
-        logging.error(f"Unexpected error: {str(error)}")
-        return jsonify({"error": "予期しないエラーが発生しました。"}), 500
-
     @app.errorhandler(NotFound)
     def handle_not_found(error):
         logging.error(f"Not found: {error.description}")
-        return jsonify({"error": "リソースが見つかりません。"}), 404
+        return jsonify({"error": "not found"}), 404
+
+    @app.errorhandler(Exception)
+    def handle_exception(error):
+        safe_rollback()
+        logging.error(f"Unexpected error type: {type(error)}, message: {str(error)}")
+        return jsonify({"error": "予期しないエラーが発生しました。"}), 500

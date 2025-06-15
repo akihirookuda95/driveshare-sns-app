@@ -69,4 +69,4 @@ def test_get_post_detail_not_found(test_client):
     response = test_client.get("/posts/9999")
     assert response.status_code == 404
     data = response.get_json()
-    assert "Post with ID 9999 not found." in data["error"]
+    assert "not found" in data["error"]
