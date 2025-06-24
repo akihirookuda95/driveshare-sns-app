@@ -20,8 +20,6 @@ class User(db.Model):
     posts = db.relationship('Post', backref='author', lazy=True, cascade='all, delete-orphan')
     comments = db.relationship("Comment", backref="author", lazy=True, cascade='all, delete-orphan')
     likes = db.relationship('Like', backref='user', lazy=True, cascade='all, delete-orphan')
-
-    # Follow relationships
     following = db.relationship(
         'Follow',
         foreign_keys='Follow.follower_id',
