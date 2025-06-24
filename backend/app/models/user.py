@@ -2,7 +2,9 @@ from backend.app.extensions import db
 
 
 class User(db.Model):
-    """ユーザーを表すモデル"""
+    """
+    ユーザーを表すモデル
+    """
 
     __tablename__ = 'users'
 
@@ -12,11 +14,12 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
     profile_image_url = db.Column(db.String(255), nullable=True)
     bio = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
-    # Relationships
     posts = db.relationship('Post', backref='author', lazy=True, cascade='all, delete-orphan')
     comments = db.relationship("Comment", backref="author", lazy=True, cascade='all, delete-orphan')
-    likes = db.relationship("Like", backref="user", lazy=True)
+    likes = db.relationship('Like', backref='user', lazy=True, cascade='all, delete-orphan')
 
     # Follow relationships
     following = db.relationship(
@@ -33,9 +36,6 @@ class User(db.Model):
         lazy='dynamic',
         cascade='all, delete-orphan'
     )
-
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     def __repr__(self):
         return f'<User {self.username}>'
