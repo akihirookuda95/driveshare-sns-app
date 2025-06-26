@@ -17,6 +17,10 @@ class Comment(db.Model):
 
     likes = db.relationship('Like', foreign_keys='Like.comment_id', backref='comment', lazy=True, cascade='all, delete-orphan')
 
+    __table_args__ = (
+        db.Index('idx_post_created', 'post_id', 'created_at'),
+    )
+
     def __repr__(self):
         return f'<Comment {self.id} by User {self.user_id} on Post {self.post_id}>'
 

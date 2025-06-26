@@ -12,13 +12,15 @@ class Follow(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     __table_args__ = (
         # 同じユーザー同士がフォローし合うことを防ぐためのユニーク制約
         db.UniqueConstraint('follower_id', 'followed_id', name='unique_follower_relationship'),
         # 自分自身をフォローできないようにするたねのチェック制約
         db.CheckConstraint('follower_id != followed_id', name='no_self_follow'),
+        # indexを追加して検索性能を向上
+        db.Index('idx_follower_id', 'follower_id'),
+        db.Index('idx_followed_id', 'followed_id'),
     )
 
     def __repr__(self):

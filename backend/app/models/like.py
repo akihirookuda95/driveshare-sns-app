@@ -27,6 +27,11 @@ class Like(db.Model):
             '(post_id IS NOT NULL AND comment_id IS NULL) OR (post_id IS NULL AND comment_id IS NOT NULL)',
             name='like_target_check'
         ),
+
+        # indexを追加して検索性能を向上
+        db.Index('idx_like_user_id', 'user_id'),
+        db.Index('idx_like_post_id', 'post_id'),
+        db.Index('idx_like_comment_id', 'comment_id'),
     )
 
     def __repr__(self):

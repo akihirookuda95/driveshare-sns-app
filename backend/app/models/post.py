@@ -16,8 +16,9 @@ class Post(db.Model):
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     comments = db.relationship('Comment', backref='post', lazy=True, cascade='all, delete-orphan')
-    routes = db.relationship('Route', backref='post', lazy=True, cascade='all, delete-orphan')
+    routes = db.relationship('Route', backref='post', uselist=False, cascade='all, delete-orphan') # uselist False for one-to-one relationship
     likes = db.relationship('Like', foreign_keys='Like.post_id', backref='post', lazy=True, cascade='all, delete-orphan')
+    photos = db.relationship('Photo', backref='post', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<Post {self.title}>'
