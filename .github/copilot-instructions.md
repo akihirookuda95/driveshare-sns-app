@@ -1,0 +1,28 @@
+- このリポジトリは、ドライブシェアSNSアプリの開発を目的としています。
+- 技術スタックは、以下の通りです。
+  - フロントエンド: React, TypeScript
+  - バックエンド: Flask, Python
+  - データベース: PostgreSQL
+  - 認証: JWT (JSON Web Token)
+- プロジェクトの仕様は、[プロジェクトの要件書、仕様書](https://github.com/akihiro-coder/driveshare-sns-app/wiki/%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E8%A6%81%E4%BB%B6%E6%9B%B8-%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%9A%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%E3%83%AB%E3%83%BC%E3%83%88%E5%85%B1%E6%9C%89SNS)を参照してください。
+- 仕様に追加された機能は、[要件書に追加された機能](https://github.com/akihiro-coder/driveshare-sns-app/wiki/%E8%BF%BD%E5%8A%A0%E6%A9%9F%E8%83%BD)を参照してください。
+- コードは、以下のルールに従って記述してください。
+  - PythonコードはPEP 8に準拠すること
+  - TypeScriptコードは、[AirbnbのJavaScriptスタイルガイド](
+  - Robert C. MartinのClean Codeに基づくスタイルガイド)に準拠すること
+  - Reactコンポーネントは、[Reactの公式スタイルガイド](https://reactjs.org/docs/faq-structure.html)に従うこと
+- アーキテクチャは、Robert C. MartinのClean Architectureに基づいて設計してください。
+- 開発者は、コードの可読性と保守性を重視し、適切なコメントとドキュメントを提供してください。
+- コードの品質を保つために、コードレビューを行い、必要に応じてリファクタリングを行ってください。
+- Gitのコミットメッセージは、以下のルールに従ってください。
+  - コミットメッセージは、英語で書くこと
+  - コミットメッセージは、以下の形式に従うこと
+    - `feat: 新機能の追加`
+    - `fix: バグ修正`
+    - `docs: ドキュメントの変更`
+    - `style: スタイルの変更（コードの動作に影響しない）`
+    - `refactor: リファクタリング（バグ修正や機能追加ではない）`
+    - `test: テストの追加や修正`
+    - `chore: その他の変更（ビルドプロセスや補助ツールなど）`
+- MVP（Minimum Viable Product）を目指し、必要な機能を優先的に実装してください。
+- MVPに関するissueは、[MVP完了までの流れ](https://github.com/akihiro-coder/driveshare-sns-app/issues/22)を参照すること。

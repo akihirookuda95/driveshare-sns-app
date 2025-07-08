@@ -1,10 +1,8 @@
 import flask
 from flask import Blueprint, jsonify, request
 
-from backend.app.extensions import db
-from backend.app.models.post import Post
 from backend.app.repositories.post import PostRepository
-from backend.app.schemas.post import PostCreateSchema, PostResponseSchema, PostUpdateSchema
+from backend.app.schemas.post import  PostResponseSchema, PostUpdateSchema
 from backend.app.services.post import PostService
 
 
@@ -33,25 +31,14 @@ def create_post() -> tuple[flask.Response, int]:
     post_data = request.get_json()
     if not post_data:
         return jsonify({"error": "リクエストボディが空です。"}), 400
-
-    post_schema = PostCreateSchema(**post_data)
-
-    new_post = post_service.create_post(post_schema)
-
-    response = PostResponseSchema.model_validate(new_post)
+    response = post_service.create_post(post_data)
     return jsonify(response.model_dump()), 201
 
 
 @post_bp.route('/<int:post_id>', methods=['PUT'])
 def update_post(post_id: int) -> tuple[flask.Response, int]:
-    post_data = request.get_json()
+    post_data: dict = request.get_json()
     if not post_data:
         return jsonify({"error": "リクエストボディが空です。"}), 400
-
-    post_schema = PostUpdateSchema(**post_data)
-
-    updated_post = post_service.update_post(post_id, post_schema)
-
-    response = PostUpdateSchema.model_validate(updated_post)
+    response = post_service.update_post(post_id, post_data)
     return jsonify(response.model_dump()), 200
-

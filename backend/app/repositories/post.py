@@ -63,10 +63,10 @@ class PostRepository:
             return post
         except IntegrityError:
             self.db.session.rollback()
-            raise Exception(f"Database integrity error occured: Failed to create post.")
+            raise Exception(f"Database integrity error occurred: Failed to create post.")
         except SQLAlchemyError:
             self.db.session.rollback()
-            raise SQLAlchemyError(f"Database error occured: Failed to create post.")
+            raise SQLAlchemyError(f"Database error occurred: Failed to create post.")
 
 
     def update_post(self, post: Post) -> Post:
