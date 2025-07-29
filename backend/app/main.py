@@ -1,6 +1,5 @@
 import os
 
-from backend.app.models import user
 from dotenv import load_dotenv
 from flask import Flask
 
@@ -9,6 +8,7 @@ from backend.app.error_handlers import register_error_handlers
 from backend.app.extensions import db, cors, migrate
 from backend.app.controllers.user import user_bp
 from backend.app.controllers.post import post_bp
+from backend.app.controllers.message import message_bp
 
 # Load environment variables from .env file
 env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
@@ -41,6 +41,7 @@ def create_app(config_class=None):
 
     app.register_blueprint(user_bp)
     app.register_blueprint(post_bp)
+    app.register_blueprint(message_bp)
 
     register_error_handlers(app)
 

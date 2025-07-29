@@ -8,7 +8,7 @@ from backend.app.schemas.post import PostCreateSchema, PostResponseSchema, PostU
 from backend.app.services.post import PostService
 
 
-post_bp = Blueprint('post', __name__, url_prefix='/posts')
+post_bp = Blueprint('post', __name__, url_prefix='/api/posts')
 post_service = PostService(repository=PostRepository())
 
 

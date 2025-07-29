@@ -10,7 +10,7 @@ from backend.app.models.user import User
 from backend.app.schemas.user import UserBase, UserCreate
 
 
-user_bp = Blueprint('user', __name__)
+user_bp = Blueprint('user', __name__, url_prefix='/api/users')
 logger = logging.getLogger(__name__)
 
 
